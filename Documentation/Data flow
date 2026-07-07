@@ -1,0 +1,58 @@
+Flight Data Sources
+     ----------------------------------------
+      CSV        JSON         XML
+          \        |        /
+           \       |       /
+            \      |      /
+
+          Bronze Layer
+---------------------------------------
+COPY INTO
+Auto Loader
+XML Parser
+
+Raw Delta Tables
++ Audit Columns
+(load_dt, source)
+
+                │
+                ▼
+
+          Silver Layer
+---------------------------------------
+Data Cleaning
+Remove Duplicates
+Handle Nulls
+Standardize Columns
+Business Rules
+Malformed Records
+Date Formatting
+
+                │
+                ▼
+
+          Gold Layer
+---------------------------------------
+Dimension Tables
+
+dim_airline
+dim_airport
+
+Fact Table
+
+fact_flight_delays
+
+Business Summary Tables
+
+monthly_delay_summary
+airport_delay_summary
+airline_delay_summary
+route_delay_summary
+cancellation_summary
+
+                │
+                ▼
+
+Analytics Dashboard
+Resource Monitoring
+Business KPIs

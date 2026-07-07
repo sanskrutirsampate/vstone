@@ -1,0 +1,148 @@
+Case Study: End-to-End Flight Delay Data Engineering Pipeline
+
+Business Problem
+
+Airline operations generate millions of flight records every day from multiple systems in different formats such as CSV, JSON, and XML. These datasets contain valuable information about flight schedules, delays, cancellations, airports, and airlines.
+
+However, the raw data has several challenges:
+
+* Data arrives in multiple file formats.
+* Data quality issues (null values, duplicates, inconsistent column names).
+* Large volume (~25GB) makes manual processing inefficient.
+* No centralized analytics layer for reporting.
+* Difficult to track pipeline execution and data quality.
+
+The organization needed a scalable, cloud-native data engineering solution to ingest, process, govern, and analyze flight delay data.
+
+⸻
+
+Objective
+
+Build an end-to-end Medallion Architecture pipeline using Databricks that:
+
+* Supports multi-format ingestion (CSV, JSON, XML)
+* Handles incremental data loading
+* Performs data cleansing and standardization
+* Implements Delta Lake best practices
+* Creates analytical Star Schema
+* Provides monitoring dashboards
+* Enables business reporting
+⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
+Medallion Architecture
+
+Bronze Layer
+
+Purpose:
+
+Store raw data exactly as received.
+
+Features
+
+* COPY INTO for CSV
+* Auto Loader for JSON
+* XML ingestion
+* Audit Columns
+* Delta Tables
+
+Output:
+flight_bronze
+flight_json_bronze
+flight_xml_bronze
+flight_csv_incremental_bronze
+⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
+
+Silver Layer
+
+Purpose
+
+Transform raw data into clean, standardized datasets.
+
+Operations
+
+✔ Remove duplicates
+
+✔ Handle missing values
+
+✔ Standardize column names
+
+✔ Apply business rules
+
+✔ Create malformed records table
+
+✔ Add derived columns
+
+Output:
+flight_csv_silver
+flight_json_silver
+flight_xml_silver
+flight_csv_incremental_silver
+⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
+
+Gold Layer
+
+Purpose
+
+Provide analytics-ready data.
+
+Created
+
+Dimensions
+dim_airline
+dim_airport
+
+Fact
+fact_flight_delays
+
+Summary Tables
+monthly_delay_summary
+airport_delay_summary
+route_delay_summary
+airline_delay_summary
+cancellation_summary
+
+⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
+
+Key Features
+
+✔ Multi-format data ingestion
+
+✔ Incremental loading
+
+✔ Delta Lake
+
+✔ Unity Catalog
+
+✔ Audit Columns
+
+✔ Data Quality Validation
+
+✔ Star Schema Modeling
+
+✔ Resource Monitoring
+
+✔ Business KPI Dashboards
+⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
+
+Business KPIs
+
+* Total Flights
+* Cancelled Flights
+* Average Departure Delay
+* Average Arrival Delay
+* Average Taxi Time
+* Average Air Time
+* Delay by Airline
+* Delay by Airport
+* Delay by Route
+* Monthly Delay Trend
+
+⸻
+
+Project Outcome
+
+* Automated ingestion of ~25GB flight data.
+* Standardized and validated data using Medallion Architecture.
+* Implemented scalable Delta Lake tables.
+* Built Star Schema for analytics.
+* Enabled business-ready reporting and monitoring.
+* Improved data reliability and simplified reporting.

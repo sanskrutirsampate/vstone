@@ -1,0 +1,37 @@
+resources:
+  jobs:
+    Bronze_Layer:
+      name: Bronze Layer
+      email_notifications:
+        on_start:
+          - sanskruti.r.sampate@v4c.ai
+        on_success:
+          - sanskruti.r.sampate@v4c.ai
+        on_failure:
+          - sanskruti.r.sampate@v4c.ai
+      tasks:
+        - task_key: bronze_csv_copy_into
+          notebook_task:
+            notebook_path: ../../src/notebooks/01_bronze_ingest_csv_copy_into.ipynb
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: bronze_csv_incremental_dlt
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.pipeline_csv_incremental.id}
+        - task_key: bronze_json_autoloader
+          notebook_task:
+            notebook_path: ../../src/notebooks/02_bronze_ingest_json_autoloader.ipynb
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: bronze_xml_pyspark
+          notebook_task:
+            notebook_path: ../../src/notebooks/03_bronze_ingest_xml_pyspark.ipynb
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED

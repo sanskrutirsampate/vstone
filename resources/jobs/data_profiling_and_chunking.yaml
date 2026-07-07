@@ -1,0 +1,12 @@
+resources:
+  jobs:
+    Data_Chunking:
+      name: Data Chunking
+      tasks:
+        - task_key: data_profiling_chunking
+          notebook_task:
+            notebook_path: ../../src/notebooks/00_data_profiling_and_chunking.ipynb
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED

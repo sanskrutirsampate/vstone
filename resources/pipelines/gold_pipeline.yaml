@@ -1,0 +1,23 @@
+resources:
+  pipelines:
+    pipeline_06_a_b_gold_layer:
+      name: 06-A-B-Gold Layer
+      libraries:
+        - glob:
+            include: ../../src/pipelines/Gold_Layer/transformations/**
+      schema: gold
+      continuous: false
+      development: false
+      photon: true
+      channel: CURRENT
+      catalog: vstone
+      notifications:
+        - email_recipients:
+            - sanskruti.r.sampate@v4c.ai
+          alerts:
+            - on-update-success
+            - on-update-failure
+            - on-update-fatal-failure
+            - on-flow-failure
+      serverless: true
+      root_path: ../../src/pipelines/Gold_Layer

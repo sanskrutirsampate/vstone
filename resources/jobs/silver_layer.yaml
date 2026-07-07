@@ -1,0 +1,44 @@
+resources:
+  jobs:
+    Silver_Layer:
+      name: Silver Layer
+      tasks:
+        - task_key: silver_csv
+          notebook_task:
+            notebook_path: ../../src/notebooks/05-silver
+              transformation.ipynb
+            base_parameters:
+              bronze_table: flight_bronze
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: silver_csv_incremental
+          notebook_task:
+            notebook_path: ../../src/notebooks/05-silver
+              transformation.ipynb
+            base_parameters:
+              bronze_table: flight_csv_incremental_bronze
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: silver_json
+          notebook_task:
+            notebook_path: ../../src/notebooks/05-silver
+              transformation.ipynb
+            base_parameters:
+              bronze_table: flight_json_bronze
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: silver_xml
+          notebook_task:
+            notebook_path: ../../src/notebooks/05-silver
+              transformation.ipynb
+            base_parameters:
+              bronze_table: flight_xml_bronze
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED

@@ -1,0 +1,16 @@
+resources:
+  pipelines:
+    pipeline_csv_incremental:
+      name: csv_incremental
+      libraries:
+        - glob:
+            include: ../../src/pipelines/Bronze_Pipeline/transformations/**
+      schema: bronze
+      continuous: false
+      development: false
+      photon: true
+      channel: CURRENT
+      catalog: vstone
+      serverless: true
+      root_path: ../../src/pipelines/Bronze_Pipeline
+
